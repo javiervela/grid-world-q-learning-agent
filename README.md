@@ -1,6 +1,8 @@
 # GridWorld Q-Learning Agent
 
-## Dependencies
+> This project is an assignment for the course "Reinforcement Learning" at the Master in Artificial Intelligence Research at the Universidad Internacional Menéndez Pelayo (UIMP).
+
+## Requirements
 
 - Python 3.13
 - Poetry (https://python-poetry.org/)
