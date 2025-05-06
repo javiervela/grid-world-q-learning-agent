@@ -1,5 +1,7 @@
 # GridWorld Q-Learning Agent
 
+A Reinforcement Learning agent implementing the Q-Learning algorithm to navigate and solve the GridWorld environment. The agent learns optimal policies through trial-and-error interactions with the environment, maximizing cumulative rewards.
+
 > This project is an assignment for the course "Reinforcement Learning" at the Master in Artificial Intelligence Research at the Universidad Internacional Menéndez Pelayo (UIMP).
 
 ## Requirements
