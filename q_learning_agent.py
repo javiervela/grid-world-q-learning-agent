@@ -1,5 +1,6 @@
 import time
 import numpy as np
+import copy
 from optparse import OptionParser
 from environment import Env
 from collections import defaultdict
@@ -99,7 +100,9 @@ if __name__ == "__main__":
         state = env.reset(MOSTRAR_PROCESO)
 
         ### INICIO DE VARIABLES ÚTILES PARA MODIFICACION 1A ###
-        prev_q_table = agent.q_table.copy()  # Guardar la q-table antes de aprender
+        # Guardar la q-table antes de aprender
+        # Previously, the copy method was used, but it does not create a deep copy of the values, and changes to agent.q_table would also modify the copied version.
+        prev_q_table = copy.deepcopy(agent.q_table)
         converged = False
         ### FIN DE VARIABLES ÚTILES PARA MODIFICACION 1A ###
         while True:
