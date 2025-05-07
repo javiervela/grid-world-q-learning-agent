@@ -139,21 +139,22 @@ if __name__ == "__main__":
 
             # Number of episodes to wait for convergence
             patience = 10
-            # Threshold to consider that the Q-tables are equal
-            threshold = 1e-3
             if "stable_count" not in locals():
                 # Number of episodes with no changes in Q-table
                 stable_count = 0
 
-            # Check if the Q-tables are equal within the threshold
-            def q_tables_differ(prev_q, current_q, threshold):
-                for state in set(prev_q.keys()).union(current_q.keys()):
-                    for a, b in zip(prev_q[state], current_q[state]):
-                        if abs(a - b) > threshold:
-                            return True
-                return False
+            # Get previous and current policies
+            prev_policy = {}
+            for state, q_values in prev_q_table.items():
+                best_action = np.argmax(q_values)
+                prev_policy[state] = best_action
+            current_policy = {}
+            for state, q_values in agent.q_table.items():
+                best_action = np.argmax(q_values)
+                current_policy[state] = best_action
 
-            if not q_tables_differ(prev_q_table, agent.q_table, threshold):
+            # Check if the policies are equal
+            if current_policy == prev_policy:
                 stable_count += 1
             else:
                 stable_count = 0
