@@ -137,14 +137,31 @@ if __name__ == "__main__":
         ### INICIO DE MODIFICACION 1A ###
         if not converged:
 
-            ### AQUÍ SE DEBE INTEGRAR LA LÓGICA QUE COMPRUEBE QUE SE HAN CONVERGIDO ##
+            # Number of episodes to wait for convergence
+            patience = 10
+            # Threshold to consider that the Q-tables are equal
+            threshold = 1e-3
+            if "stable_count" not in locals():
+                # Number of episodes with no changes in Q-table
+                stable_count = 0
 
-            if converged:
-                print(f"El algoritmo ha convergido tras {episode} episodios")
+            # Check if the Q-tables are equal within the threshold
+            def q_tables_differ(prev_q, current_q, threshold):
+                for state in set(prev_q.keys()).union(current_q.keys()):
+                    for a, b in zip(prev_q[state], current_q[state]):
+                        if abs(a - b) > threshold:
+                            return True
+                return False
+
+            if not q_tables_differ(prev_q_table, agent.q_table, threshold):
+                stable_count += 1
+            else:
+                stable_count = 0
+
+            if stable_count >= patience:
+                print(f"El algoritmo ha convergido tras {episode + 1} episodios")
                 converged = True
-            converged = False
-        ### FINAL DE MODIFICACION 1A ###
-
+                break
     env.print_policy_all(agent)
     guess = input("Pulsa cualquier tecla para salir...")
     exit(0)
