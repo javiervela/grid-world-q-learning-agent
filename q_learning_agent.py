@@ -160,9 +160,11 @@ if __name__ == "__main__":
                 stable_count = 0
 
             if stable_count >= patience:
-                print(f"El algoritmo ha convergido tras {episode + 1} episodios")
+                print(f"El algoritmo ha convergido tras {episode} episodios")
                 converged = True
                 break
+        ### FINAL DE MODIFICACION 1A ###
+
     env.print_policy_all(agent)
     guess = input("Pulsa cualquier tecla para salir...")
     exit(0)
