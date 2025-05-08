@@ -138,7 +138,7 @@ if __name__ == "__main__":
         if not converged:
 
             # Number of episodes to wait for convergence
-            patience = 10
+            patience = 20
             if "stable_count" not in locals():
                 # Number of episodes with no changes in Q-table
                 stable_count = 0
