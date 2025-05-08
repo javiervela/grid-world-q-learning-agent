@@ -15,7 +15,8 @@ class QLearningAgent:
         self.actions = actions
         self.learning_rate = 0.25
         self.discount_factor = 0.9
-        self.epsilon = 0.15  # TODO --> SE MODIFICA PARA LA PREGUNTA 1E y 2B
+        self.epsilon = 0.15
+        self.epsilon_decay = 0.999
         self.q_table = defaultdict(lambda: [DEF_Q_V, DEF_Q_V, DEF_Q_V, DEF_Q_V])
 
         # La variable q_table es una estructura de tipo diccionario, donde la clave es una entrada del tipo [x, y]
@@ -43,6 +44,9 @@ class QLearningAgent:
             # take action according to the q function table
             state_action = self.q_table[state]
             action, _ = self.arg_max(state_action)
+
+        self.epsilon *= self.epsilon_decay
+        
         return action
 
     @staticmethod
